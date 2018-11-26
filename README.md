@@ -1,4 +1,4 @@
-# Google Kubernetes Engine Bianry Authorization Demo
+# Google Kubernetes Engine Binary Authorization Demo
 
 ## Table of Contents
 
