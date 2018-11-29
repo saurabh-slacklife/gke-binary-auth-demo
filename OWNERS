@@ -4,5 +4,6 @@ approvers:
   - geojaz
   - techgnosis
   - erkolson
+  - bgeesaman
 labels:
   - gke-helmsman
