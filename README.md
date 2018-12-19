@@ -79,6 +79,24 @@ Once the container image has been built and the necessary attestations have been
 * A Google Cloud account and project is required for this demo. The project must have the proper quota to run a Kubernetes Engine cluster with at least 2 vCPUs and 7.5GB of RAM. How to check your account's quota is documented here: [quotas][1].
 * Note: the Binary Authorization and Container Analysis APIs are currently in `beta`. [Read more][9] about the support level and SLAs given to APIs designated as `beta` before using these features in a production environment.
 
+### Run Demo in a Google Cloud Shell
+
+
+Click the button below to run the demo in a [Google Cloud Shell](https://cloud.google.com/shell/docs/)
+
+
+[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/gke-binary-auth-demo.git&amp;cloudshell_image=gcr.io/graphite-cloud-shell-images/terraform:latest&amp;cloudshell_tutorial=README.md)
+
+
+All the tools for the demo are installed. When using Cloud Shell execute the following
+command in order to setup gcloud cli. When executing this command please setup your region
+and zone.
+
+```console
+gcloud init
+```
+
+
 ### Supported Operating Systems
 
 This demo can be run from MacOS, Linux, or, alternatively, directly from [Google Cloud Shell](https://cloud.google.com/shell/docs/). The latter option is the simplest as it only requires browser access to GCP and no additional software is required. Instructions for both alternatives can be found below.
