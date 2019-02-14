@@ -136,6 +136,7 @@ For deployments without using Cloud Shell, you will need to have access to a com
 * [kubectl (v1.10.0 or later)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [git](https://git-scm.com/)
 * [docker](https://www.docker.com)
+* [GnuPG](https://www.gnupg.org/)
 
 Use `git` to clone this project to your local machine:
 
@@ -636,6 +637,8 @@ Note: You will want to notify a security team when this occurs as this can be le
 1. In the GCP console navigate to the **Stackdriver** -> **Logging** page
 1. On this page change the resource filter to be `resource.type="k8s_cluster" protoPayload.request.metadata.annotations."alpha.image-policy.k8s.io/break-glass"="true"`
 1. You should see events when the admission controller allowed a pod due to the annotation being present.  From this filter, you can create a `Sink` which sends logs that match this filter to an external destination.
+
+![Stackdriver break-glass filter](images/Stackdriver_break-glass-filter.png)
 
 To run an unsigned `nginx` container with the "break glass" annotation, run:
 
