@@ -54,6 +54,7 @@ gcloud beta container clusters create "$CLUSTER_NAME" \
   --no-enable-basic-auth \
   --no-issue-client-certificate \
   --enable-ip-alias \
+  --metadata disable-legacy-endpoints=true \
   --enable-binauthz
 
 # Get the kubectl credentials for the GKE cluster.

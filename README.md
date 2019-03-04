@@ -27,7 +27,7 @@ One of the key security concerns for running Kubernetes clusters is knowing what
 Some of the key concerns are:
 
 * Safe Origin - How do you ensure that all container images running in the cluster come from an approved source?
-* Consistecy and Validation - How do you ensure that all desired validation steps were completed successfully for every container build and every deployment?
+* Consistency and Validation - How do you ensure that all desired validation steps were completed successfully for every container build and every deployment?
 * Integrity - How do you ensure that containers were not modified before running after their provenance was proven?
 
 From a security standpoint, not enforcing where images originate from presents several risks:
@@ -320,7 +320,7 @@ Error from server (Forbidden): error when creating "STDIN": pods "nginx" is forb
 To be able to see when any and all images are blocked by the Binary Authorization Policy, navigate to the GKE Audit Logs in Stackdriver and filter on those error messages related to this activity.
 
 1. In the GCP console navigate to the **Stackdriver** -> **Logging** page
-1. On this page change the resource filter to be `GKE Cluster Operations` -> `my-cluster-1` -> `All Location`
+1. On this page, click the downward arrow on the far right of the "Filter by label or text search" input field, and select `Convert to advanced filter`.  Populate the text box with `resource.type="k8s_cluster" protoPayload.status.message="Forbidden"`
 1. You should see errors corresponding to the blocking of the `nginx` pod from running.
 
 #### Denying Images Except From Whitelisted Container Registries
@@ -583,7 +583,7 @@ Select `Allow only images that have been approved by all of the following attest
 
 ![Edit Policy](images/attest2.png)
 
-And click on `Add Attestor`.  Enter the contents of your copy/paste buffer in the format of `projects/${PROJECT_ID}/attestors/${ATTESTOR}`, and then click `Submit` followed by `Save Policy`.  The default policy should still show `Disallow all images`, but the cluster-specific rule should be requiring attestation.
+Next, click on `Add Attestors` followed by `Add attestor by resource ID`.  Enter the contents of your copy/paste buffer in the format of `projects/${PROJECT_ID}/attestors/${ATTESTOR}`, then click `Add 1 Attestor`, `Submit`, and finally `Save Policy`.  The default policy should still show `Disallow all images`, but the cluster-specific rule should be requiring attestation.
 
 Now, obtain the most recent SHA256 Digest of the signed image from the previous steps:
 
@@ -618,7 +618,7 @@ From a user's perspective, the Binary Authorization policy may incorrectly block
 Note: You will want to notify a security team when this occurs as this can be leveraged by malicious users if they have the ability to create a pod.  In this case, though, your response procedures can be started within seconds of the activity occurring.  The logs are available in Stackdriver:
 
 1. In the GCP console navigate to the **Stackdriver** -> **Logging** page
-1. On this page change the resource filter to be `resource.type="k8s_cluster" protoPayload.request.metadata.annotations."alpha.image-policy.k8s.io/break-glass"="true"`
+1. On this page, click the downward arrow on the far right of the "Filter by label or text search" input field, and select `Convert to advanced filter`.  Populate the text box with `resource.type="k8s_cluster" protoPayload.request.metadata.annotations."alpha.image-policy.k8s.io/break-glass"="true"`
 1. You should see events when the admission controller allowed a pod due to the annotation being present.  From this filter, you can create a `Sink` which sends logs that match this filter to an external destination.
 
 ![Stackdriver break-glass filter](images/Stackdriver_break-glass-filter.png)
