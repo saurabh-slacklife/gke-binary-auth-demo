@@ -320,7 +320,7 @@ Error from server (Forbidden): error when creating "STDIN": pods "nginx" is forb
 To be able to see when any and all images are blocked by the Binary Authorization Policy, navigate to the GKE Audit Logs in Stackdriver and filter on those error messages related to this activity.
 
 1. In the GCP console navigate to the **Stackdriver** -> **Logging** page
-1. On this page, click the downward arrow on the far right of the "Filter by label or text search" input field, and select `Convert to advanced filter`.  Populate the text box with `resource.type="k8s_cluster" protoPayload.status.message="Forbidden"`
+1. On this page, click the downward arrow on the far right of the "Filter by label or text search" input field, and select `Convert to advanced filter`.  Populate the text box with `resource.type="k8s_cluster" protoPayload.status.message="PERMISSION_DENIED"`
 1. You should see errors corresponding to the blocking of the `nginx` pod from running.
 
 #### Denying Images Except From Whitelisted Container Registries
