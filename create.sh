@@ -40,9 +40,6 @@ enable_project_api "${PROJECT}" "containerregistry.googleapis.com"
 enable_project_api "${PROJECT}" "containeranalysis.googleapis.com"
 enable_project_api "${PROJECT}" "binaryauthorization.googleapis.com"
 
-# Turn off annoying messages
-gcloud config set container/new_scopes_behavior true > /dev/null
-
 # Create a 2-node zonal GKE cluster
 # Requires the Beta API to enable binary authorization support
 echo "Creating cluster"
