@@ -639,8 +639,8 @@ curl -X DELETE \
 [2]: https://cloud.google.com
 [3]: https://cloud.google.com/shell/docs/
 [4]: https://cloud.google.com/binary-authorization/
-[5]: https://grafeas.io/docs/concepts/what-is-grafeas/overview.html
-[6]: https://grafeas.io/docs/concepts/what-is-kritis/overview.html
+[5]: https://github.com/grafeas/grafeas/blob/master/docs/grafeas_concepts.md
+[6]: https://github.com/grafeas/kritis/blob/master/docs/binary-authorization.md
 [7]: https://cloud.google.com/binary-authorization/docs/key-concepts#analysis_notes
 [8]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 [9]: https://cloud.google.com/terms/launch-stages
