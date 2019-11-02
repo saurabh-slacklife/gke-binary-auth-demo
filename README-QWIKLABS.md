@@ -407,7 +407,7 @@ Add the PGP Key to the Attestor:
 gcloud --project="${PROJECT_ID}" \
     beta container binauthz attestors public-keys add \
     --attestor="${ATTESTOR}" \
-    --public-key-file="${PGP_PUB_KEY}"
+    --pgp-public-key-file="${PGP_PUB_KEY}"
 ```
 
 List the newly created Attestor:
