@@ -32,7 +32,7 @@ Some of the key concerns are:
 
 From a security standpoint, not enforcing where images originate from presents several risks:
 
-* A malicious actor that has compromised a container may be able to obtain sufficient cluster privileges to launch others containers from an unknown source without enforcement.
+* A malicious actor that has compromised a container may be able to obtain sufficient cluster privileges to launch other containers from an unknown source without enforcement.
 * An authorized user with the permissions to create pods may be able to accidentally or maliciously run an undesired container directly inside a cluster.
 * An authorized user may accidentally or maliciously overwrite a docker image tag with a functional container that has undesired code silently added to it, and Kubernetes will pull and deploy that container as a part of a deployment automatically.
 
@@ -77,8 +77,6 @@ Once the container image has been built and the necessary attestations have been
 
 * Access to an existing Google Cloud project with the Kubernetes Engine service enabled. If you do not have a Google Cloud account, please signup for a free trial [here][2].
 * A Google Cloud account and project is required for this demo. The project must have the proper quota to run a Kubernetes Engine cluster with at least 2 vCPUs and 7.5GB of RAM. How to check your account's quota is documented here: [quotas][1].
-* Note: the Binary Authorization and Container Analysis APIs are currently in `beta`. [Read more][9] about the support level and SLAs given to APIs designated as `beta` before using these features in a production environment.
-
 
 ### Supported Operating Systems
 
@@ -423,14 +421,14 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $(gcloud auth print-access-token)"  \
     --data-binary @${NOTE_PAYLOAD_PATH}  \
-    "https://containeranalysis.googleapis.com/v1beta1/projects/${PROJECT_ID}/notes/?noteId=${NOTE_ID}"
+    "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/?noteId=${NOTE_ID}"
 ```
 
 You should see the output from the prior command display the created note, but the following command will also list the created note:
 
 ```console
 curl -H "Authorization: Bearer $(gcloud auth print-access-token)"  \
-    "https://containeranalysis.googleapis.com/v1beta1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
+    "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
 ```
 
 ##### Creating a PGP Signing Key
@@ -680,7 +678,7 @@ Delete the Container Analysis note:
 ```console
 curl -X DELETE \
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-    "https://containeranalysis.googleapis.com/v1beta1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
+    "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
 ```
 
 ## Troubleshooting
