@@ -22,7 +22,6 @@ limitations under the License.
 // Reference: https://github.com/jenkinsci/kubernetes-plugin
 
 // set up pod label and GOOGLE_APPLICATION_CREDENTIALS (for Terraform)
-// set up pod label and GOOGLE_APPLICATION_CREDENTIALS (for Terraform)
 def containerName = "binary-auth"
 def GOOGLE_APPLICATION_CREDENTIALS    = '/home/jenkins/dev/jenkins-deploy-dev-infra.json'
 def jenkins_container_version = env.JENKINS_CONTAINER_VERSION
