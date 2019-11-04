@@ -22,34 +22,28 @@ limitations under the License.
 // Reference: https://github.com/jenkinsci/kubernetes-plugin
 
 // set up pod label and GOOGLE_APPLICATION_CREDENTIALS (for Terraform)
-def label = "k8s-infra"
-def containerName = "k8s-node"
+// set up pod label and GOOGLE_APPLICATION_CREDENTIALS (for Terraform)
+def containerName = "binary-auth"
 def GOOGLE_APPLICATION_CREDENTIALS    = '/home/jenkins/dev/jenkins-deploy-dev-infra.json'
+def jenkins_container_version = env.JENKINS_CONTAINER_VERSION
 
-podTemplate(label: label, yaml: """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    jenkins: build-node
-spec:
-  containers:
-  - name: ${containerName}
-    image: gcr.io/pso-helmsman-cicd/jenkins-k8s-node:${env.CONTAINER_VERSION}
-    command: ['cat']
-    tty: true
-    volumeMounts:
-    # Mount the dev service account key
-    - name: dev-key
-      mountPath: /home/jenkins/dev
-  volumes:
-  # Create a volume that contains the dev json key that was saved as a secret
-  - name: dev-key
-    secret:
-      secretName: jenkins-deploy-dev-infra
-"""
- ) {
- node(label) {
+podTemplate(
+            containers: [
+                containerTemplate(name: "${containerName}",
+                                  image: "gcr.io/pso-helmsman-cicd/jenkins-k8s-node:${jenkins_container_version}",
+                                  command: 'tail -f /dev/null',
+                                  resourceRequestCpu: '1000m',
+                                  resourceLimitCpu: '2000m',
+                                  resourceRequestMemory: '1Gi',
+                                  resourceLimitMemory: '2Gi'
+                                 )
+                        ],
+            volumes:    [secretVolume(mountPath: '/home/jenkins/dev',
+                                      secretName: 'jenkins-deploy-dev-infra'
+                                     )
+                        ]
+           ) {
+node(POD_LABEL) {
   try {
     // Options covers all other job properties or wrapper functions that apply to entire Pipeline.
     properties([disableConcurrentBuilds()])
@@ -98,7 +92,6 @@ spec:
      stage('Teardown') {
       container(containerName) {
         sh "make delete"
-        sh "gcloud auth revoke"
       }
      }
    }
