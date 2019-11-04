@@ -488,7 +488,7 @@ gcloud beta container binauthz attestations create \
     --artifact-url="${IMAGE_PATH}@${IMAGE_DIGEST}" \
     --attestor="projects/${PROJECT_ID}/attestors/${ATTESTOR}" \
     --signature-file=${GENERATED_SIGNATURE} \
-    --pgp-key-fingerprint="${PGP_FINGERPRINT}"
+    --public-key-id="${PGP_FINGERPRINT}"
 ```
 
 View the newly created attestation:
