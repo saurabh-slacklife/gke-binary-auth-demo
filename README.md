@@ -405,7 +405,7 @@ Create the `ATTESTATION` note payload:
 cat > ${NOTE_PAYLOAD_PATH} << EOF
 {
   "name": "projects/${PROJECT_ID}/notes/${NOTE_ID}",
-  "attestation_authority": {
+  "attestation": {
     "hint": {
       "human_readable_name": "${NOTE_DESC}"
     }
