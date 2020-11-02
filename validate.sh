@@ -45,7 +45,7 @@ else
 fi
 
 # Verify Container Analysis API is available/enabled
-if curl -s -H "Authorization: Bearer $(gcloud auth print-access-token)" "https://containeranalysis.googleapis.com/v1beta1/projects/${PROJECT}/notes/" > /dev/null; then
+if curl -s -H "Authorization: Bearer $(gcloud auth print-access-token)" "https://containeranalysis.googleapis.com/v1/projects/${PROJECT}/notes/" > /dev/null; then
   echo "Validation Passed: the Container Analysis API was available"
 else
   echo "Validation Failed: the Container Analysis API was NOT available"

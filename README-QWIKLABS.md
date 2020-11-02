@@ -356,14 +356,14 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $(gcloud auth print-access-token)"  \
     --data-binary @${NOTE_PAYLOAD_PATH}  \
-    "https://containeranalysis.googleapis.com/v1beta1/projects/${PROJECT_ID}/notes/?noteId=${NOTE_ID}"
+    "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/?noteId=${NOTE_ID}"
 ```
 
 You should see the output from the prior command display the created note, but the following command will also list the created note:
 
 ```console
 curl -H "Authorization: Bearer $(gcloud auth print-access-token)"  \
-    "https://containeranalysis.googleapis.com/v1beta1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
+    "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
 ```
 
 ##### Creating a PGP Signing Key
@@ -613,7 +613,7 @@ Delete the Container Analysis note:
 ```console
 curl -X DELETE \
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-    "https://containeranalysis.googleapis.com/v1beta1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
+    "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
 ```
 
 ## Troubleshooting
