@@ -41,9 +41,8 @@ enable_project_api "${PROJECT}" "containeranalysis.googleapis.com"
 enable_project_api "${PROJECT}" "binaryauthorization.googleapis.com"
 
 # Create a 2-node zonal GKE cluster
-# Requires the Beta API to enable binary authorization support
 echo "Creating cluster"
-gcloud beta container clusters create "$CLUSTER_NAME" \
+gcloud container clusters create "$CLUSTER_NAME" \
   --zone "$ZONE" \
   --cluster-version "$GKE_VERSION" \
   --machine-type "n1-standard-1" \

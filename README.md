@@ -200,9 +200,9 @@ To access the Binary Authorization Policy configuration UI, perform the followin
 
 To access the Binary Authorization Policy configuration via `gcloud`:
 
-* Run `gcloud beta container binauthz policy export > policy.yaml`
+* Run `gcloud container binauthz policy export > policy.yaml`
 * Make the necessary edits to `policy.yaml`
-* Run `gcloud beta container binauthz policy import policy.yaml`
+* Run `gcloud container binauthz policy import policy.yaml`
 
 The policy you are editing is the "default" policy, and it applies to *all GKE clusters in the GCP project* unless a cluster-specific policy is in place.  The recommendation is to create policies specific to each cluster and achieve successful operation (whitelisting registries as needed), and then set the default project-level policy to "Deny All Images".  Any new cluster in this project will then need its own cluster-specific policy.
 
@@ -461,7 +461,7 @@ Create the Attestor in the Binary Authorization API:
 
 ```console
 gcloud --project="${PROJECT_ID}" \
-    beta container binauthz attestors create "${ATTESTOR}" \
+    container binauthz attestors create "${ATTESTOR}" \
     --attestation-authority-note="${NOTE_ID}" \
     --attestation-authority-note-project="${PROJECT_ID}"
 ```
@@ -470,7 +470,7 @@ Add the PGP Key to the Attestor:
 
 ```console
 gcloud --project="${PROJECT_ID}" \
-    beta container binauthz attestors public-keys add \
+    container binauthz attestors public-keys add \
     --attestor="${ATTESTOR}" \
     --public-key-file="${PGP_PUB_KEY}"
 ```
@@ -479,7 +479,7 @@ List the newly created Attestor:
 
 ```console
 gcloud --project="${PROJECT_ID}" \
-    beta container binauthz attestors list
+    container binauthz attestors list
 ```
 
 The output should look similar to the following:
@@ -521,7 +521,7 @@ IMAGE_DIGEST="$(gcloud container images list-tags --format='get(digest)' $IMAGE_
 Create a JSON-formatted signature payload:
 
 ```console
-gcloud beta container binauthz create-signature-payload \
+gcloud container binauthz create-signature-payload \
     --artifact-url="${IMAGE_PATH}@${IMAGE_DIGEST}" > ${GENERATED_PAYLOAD}
 ```
 
@@ -549,7 +549,7 @@ cat "${GENERATED_SIGNATURE}"
 Create the attestation:
 
 ```console
-gcloud beta container binauthz attestations create \
+gcloud container binauthz attestations create \
     --artifact-url="${IMAGE_PATH}@${IMAGE_DIGEST}" \
     --attestor="projects/${PROJECT_ID}/attestors/${ATTESTOR}" \
     --signature-file=${GENERATED_SIGNATURE} \
@@ -559,7 +559,7 @@ gcloud beta container binauthz attestations create \
 View the newly created attestation:
 
 ```console
-gcloud beta container binauthz attestations list \
+gcloud container binauthz attestations list \
     --attestor="projects/${PROJECT_ID}/attestors/${ATTESTOR}"
 ```
 
@@ -670,7 +670,7 @@ Delete the Attestor:
 
 ```console
 gcloud --project="${PROJECT_ID}" \
-    beta container binauthz attestors delete "${ATTESTOR}"
+    container binauthz attestors delete "${ATTESTOR}"
 ```
 
 Delete the Container Analysis note:
